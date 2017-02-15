@@ -1,0 +1,1 @@
+This is my random quote machine I am making following the freeCodeCamp front-end certification.
