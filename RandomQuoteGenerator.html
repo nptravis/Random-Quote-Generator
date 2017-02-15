@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Random Quote Generator</title>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+	<!-- <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFmOyusHkWe_rjpePRG9ShJ4TxTijrGcs&callback=initMap">
+    </script> -->
+    <script
+  src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+  integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc="
+  crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.1.1.js"
+  	integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+  	crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css?family=Bahiana|Barrio|Caveat+Brush" rel="stylesheet">	
+
+</head>
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+$('#btn').on("click", function() {
+	$.getJSON("#", function(data) {
+  		var html = "";
+  		data.forEach(function(val) {
+  			html += '<div id="quote-content">' + val.quote + "</div>";
+  			html += '<div id="author">' + val.name + "</div>";
+  		});
+
+     $(".quotes").html(html); 
+});
+	$(".well").addClass("animated jello");
+});
+});
+// $(document).ready(function() {
+// $('#btn').on('click', function(e) {
+//     e.preventDefault();
+//     $.ajax( {
+//       url: 'http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1',
+//       success: function(data) {
+//         var post = data.shift(); // The data is an array of posts. Grab the first one.
+//         $('#quote-title').text(post.title);
+//         $('#quote-content').html(post.content);
+
+//         // If the Source is available, use it. Otherwise hide it.
+//         if (typeof post.custom_meta !== 'undefined' && typeof post.custom_meta.Source !== 'undefined') {
+//           $('#quote-source').html('Source:' + post.custom_meta.Source);
+//         } else {
+//           $('#quote-source').text('');
+//         }
+//       },
+//       cache: false
+//     });
+//   });
+// });
+
+
+</script>
+
+<style type="text/css">
+.header {
+	font-weight: 20px;
+}
+
+.container {
+	padding: 100px;
+	background-color: #4e5c72;
+}
+
+.jumbotron {
+	background-color: #c5eacf;
+
+}
+.body {
+
+}
+h1 {
+	font-family: 'Barrio', serif;
+}
+button {
+	font-family: 'Caveat Brush', serif;
+	color: #f4f754;
+	width: 100%;
+}
+.well {
+	background-color: #f6f7b2;
+	width: 100%;
+}
+#quotes {
+
+font-family: 'Bahiana', serif;
+font-size: 48px;
+font-style: italic;
+width: 500px;
+margin: 0.25em 0;
+padding: 0.25em 40px;
+line-height: 1.45;
+position: relative;
+color: #383838;
+}
+
+#quotes:before {
+
+display: block;
+content: "\201C";
+font-size: 40px;
+position: ;
+left: -20px;
+top: -20px;
+color: #7a7a7a;
+}
+
+#author {
+	/*font-family: sans serif;*/
+}
+
+/*
+#map {
+	height: 400px;
+	width: 400px;
+	background-color: grey;
+	align-content: center; 
+}
+	.hide-me {
+		display: none;*/
+	}
+</style>
+<body>
+	<div class="container container-fluid">
+	<div class="jumbotron row">
+	<h1 class="text-center">Random Quote Machine</h1>
+	<div class="row">
+	<div class="col-lg-2">
+	<button id="btn" class="btn btn-primary">Get Quote!</button>
+	</div>
+	<div class="well col-lg">
+	<div id="quotes">Your random quote will show up here!</div>
+	</div>
+	</div>
+	<!-- <div id="quote-content"></div>
+	<div id="quote-title"></div>
+	<div id="quote-source"></div> -->
+
+<!-- <script src="js/main.js"></script> -->
+	
+
+	
+
+<!-- <h3 class="text-center">My Google Maps Demo</h3>
+	<div id="map" class="center-block"></div>
+	<script>
+      function initMap() {
+        var uluru = {lat: 9.6357803, lng: -85.1598635};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 5,
+          center: uluru
+        });
+        var marker = new google.maps.Marker({
+          position: uluru,
+          map: map
+        });
+      }
+    </script> -->
+
+	</div>
+	</div>
+
+</body>
+</html>
