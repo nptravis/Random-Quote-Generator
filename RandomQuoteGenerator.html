@@ -23,20 +23,22 @@
 
 <script type="text/javascript">
 
-$(document).ready(function() {
-$('#btn').on("click", function() {
-	$.getJSON("#", function(data) {
-  		var html = "";
-  		data.forEach(function(val) {
-  			html += '<div id="quote-content">' + val.quote + "</div>";
-  			html += '<div id="author">' + val.name + "</div>";
-  		});
 
-     $(".quotes").html(html); 
-});
-	$(".well").addClass("animated jello");
-});
-});
+// $(document).ready(function() {
+// $('#btn').on("click", function() {
+// 	$.getJSON("http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1", function(data) {
+//   		var html = "";
+//   		data.forEach(function(val) {
+//   			html += '<div id="quote-content">' + val.content + "</div>";
+//   			html += '<div id="author">' + val.title + "</div>";
+//   		});
+
+//      $(".quotes").html(html); 
+     
+// });
+// 	$(".well").addClass("animated jello");
+// });
+// });
 // $(document).ready(function() {
 // $('#btn').on('click', function(e) {
 //     e.preventDefault();
@@ -76,8 +78,13 @@ $('#btn').on("click", function() {
 	background-color: #c5eacf;
 
 }
-.body {
 
+ul li {
+	list-style: none;
+}
+
+
+.body {
 }
 h1 {
 	font-family: 'Barrio', serif;
@@ -86,10 +93,13 @@ button {
 	font-family: 'Caveat Brush', serif;
 	color: #f4f754;
 	width: 100%;
+	max-width: 200px;
+	height: 200px;
 }
 .well {
 	background-color: #f6f7b2;
 	width: 100%;
+	min-height: 400px;
 }
 #quotes {
 
@@ -132,22 +142,70 @@ color: #7a7a7a;
 </style>
 <body>
 	<div class="container container-fluid">
-	<div class="jumbotron row">
+	<div class="jumbotron">
 	<h1 class="text-center">Random Quote Machine</h1>
 	<div class="row">
-	<div class="col-lg-2">
-	<button id="btn" class="btn btn-primary">Get Quote!</button>
+	<ul class="col-lg-2 col-md-4" id="buttons">
+		<li><button id="btn" class="btn btn-primary">Get Quote!</button></li>
+		<li><button id="tweet" class="btn btn-primary">Tweet it!</button></li>
+  </ul>
+	<div class="col-lg-10">
+	<div class="well">
+	<div id="quotes"></div>
 	</div>
-	<div class="well col-lg">
-	<div id="quotes">Your random quote will show up here!</div>
 	</div>
 	</div>
+	<script>
+		
+
+var quoteContainer = document.getElementById("quotes");
+var btn = document.getElementById("btn");
+var tweet = document.getElementById("tweet");
+var i = 0;
+
+
+	btn.addEventListener("click", function (){
+		var ourRequest = new XMLHttpRequest();
+		
+		ourRequest.open('GET', 'https://gist.githubusercontent.com/dmakk767/9375ff01aff76f1788aead1df9a66338/raw/491f8c2e91b7d3b8f1c8230e32d9c9bc1a1adfa6/Quotes.json%2520', true);
+		
+		ourRequest.onload= function (){
+			var ourData = JSON.parse(ourRequest.responseText);
+			renderHTML(ourData);
+			tweet.addEventListener("click", function (){
+			window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(ourData[i - 1].quote) + ' - ' + encodeURIComponent(ourData[i - 1].name));
+			
+		})
+			
+	};
+
+		ourRequest.send();
+
+    
+
+function renderHTML(data){
+
+	htmlString = "";
+	htmlString += "<div id='words'>" + data[i].quote + "</div>";
+	htmlString += "<div id='man'>" + data[i].name + "</div>";
+	i ++;
+	quoteContainer.innerHTML= htmlString;
+
+	}
+
+
+	
+ 
+});
+
+
+
+	</script>
+
 	<!-- <div id="quote-content"></div>
 	<div id="quote-title"></div>
 	<div id="quote-source"></div> -->
 
-<!-- <script src="js/main.js"></script> -->
-	
 
 	
 
@@ -169,6 +227,7 @@ color: #7a7a7a;
 
 	</div>
 	</div>
+<!-- <script src="js/main.js"></script> -->
 
 </body>
 </html>

@@ -1,29 +1,35 @@
 
-// // var pageCounter = 1;
-var quotes = document.getElementById("quotes");
+
+var quoteContainer = document.getElementById("quotes");
 var btn = document.getElementById("btn");
+var i = 0;
 
 
 	btn.addEventListener("click", function (){
 		var ourRequest = new XMLHttpRequest();
 		
-		ourRequest.open('GET', 'http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1');
+		ourRequest.open('GET', 'http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=25', true);
 		
 		ourRequest.onload= function (){
 			var ourData = JSON.parse(ourRequest.responseText);
-			renderHTML(ourData[0].content);
+			renderHTML(ourData);
+			
 	};
 
 		ourRequest.send();
+    
 
 function renderHTML(data){
-	var htmlString = data;
-	  
+	htmlString = "";
+	htmlString += "<div>" + data[i].content + "</div>";
+	htmlString += "<div>" + data[i].title + "</div>";
+	i ++;
+	quoteContainer.innerHTML= htmlString;
+
 	}
 
 	
-console.log(htmlString);
- // quotes.insertAdjacentHTML('beforeend', htmlString);
+ 
 });
 
 
